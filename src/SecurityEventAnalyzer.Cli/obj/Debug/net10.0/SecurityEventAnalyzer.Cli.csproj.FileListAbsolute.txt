@@ -1,0 +1,15 @@
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\bin\Debug\net10.0\SecurityEventAnalyzer.Cli.exe
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\bin\Debug\net10.0\SecurityEventAnalyzer.Cli.deps.json
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\bin\Debug\net10.0\SecurityEventAnalyzer.Cli.runtimeconfig.json
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\bin\Debug\net10.0\SecurityEventAnalyzer.Cli.dll
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\bin\Debug\net10.0\SecurityEventAnalyzer.Cli.pdb
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\obj\Debug\net10.0\SecurityEventAnalyzer.Cli.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\obj\Debug\net10.0\SecurityEventAnalyzer.Cli.AssemblyInfoInputs.cache
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\obj\Debug\net10.0\SecurityEventAnalyzer.Cli.AssemblyInfo.cs
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\obj\Debug\net10.0\SecurityEventAnalyzer.Cli.csproj.CoreCompileInputs.cache
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\obj\Debug\net10.0\SecurityEventAnalyzer.Cli.sourcelink.json
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\obj\Debug\net10.0\SecurityEventAnalyzer.Cli.dll
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\obj\Debug\net10.0\refint\SecurityEventAnalyzer.Cli.dll
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\obj\Debug\net10.0\SecurityEventAnalyzer.Cli.pdb
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\obj\Debug\net10.0\SecurityEventAnalyzer.Cli.genruntimeconfig.cache
+C:\Users\cehel\source\repos\SecurityEventAnalyzer\src\SecurityEventAnalyzer.Cli\obj\Debug\net10.0\ref\SecurityEventAnalyzer.Cli.dll
