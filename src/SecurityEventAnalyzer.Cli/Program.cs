@@ -46,13 +46,30 @@ class Program
             Console.WriteLine("------------------\n");
 
             var eventGroups = events.GroupBy(e => e.EventId).OrderByDescending(e => e.Key);
+            var failedLogins = events.Where(e => e.EventId == 4625);
 
             foreach (var secEvent in eventGroups)
             {
                 Console.WriteLine($"{secEvent.Key} : {secEvent.Count()}");
             }
-            
-            
+
+            Console.WriteLine("\nFailed logins by User");
+            Console.WriteLine("------------------\n");
+
+            foreach (var secEvent in failedLogins.GroupBy(e => e.Username)) 
+            {
+                Console.WriteLine($"{secEvent.Key} : {secEvent.Count()}");
+            }
+
+            Console.WriteLine("\nFailed logins by Source Ip");
+            Console.WriteLine("------------------\n");
+
+            foreach (var secEvent in failedLogins.GroupBy(e => e.SourceIp))
+            {
+                Console.WriteLine($"{secEvent.Key} : {secEvent.Count()}");
+            }
+
+
         }
 
         catch (Exception ex) 
