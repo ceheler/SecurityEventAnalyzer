@@ -1,0 +1,6 @@
+This program will accept be run via the terminal
+It should take in a file as a command line argument
+The input file should be a json format
+It will validate the file, and place the events into an array of objects
+
+I will update this as the project progresses and the final revision I will rewrite it have the complete logic flow.
