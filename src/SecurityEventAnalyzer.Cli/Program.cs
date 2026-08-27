@@ -6,13 +6,12 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Provide user with help if no command line argument is passed to the program
+        // Display usage instructions if proper command line arguments are not passed.
         if (args.Length == 0)
         {
             Console.WriteLine("Error: No command argument specified.");
             Console.WriteLine("Usage: SecurityEventAnalyzer <path-to-log>");
             return;
-            // TODO: Validate path, encompas in try catch for error handling
         }
             string inputFile = args[0];
 
@@ -25,7 +24,7 @@ class Program
         try
         {
             string content = File.ReadAllText(inputFile);
-            Console.WriteLine("File provided");
+            Console.WriteLine("\nAnalyzing " + args[0]);
             if (string.IsNullOrWhiteSpace(content))
             {
                 Console.WriteLine("Error: Log file returned null or empty. Check log file.");
@@ -33,11 +32,24 @@ class Program
             }
             
             SecurityEvent[] events = JsonSerializer.Deserialize<SecurityEvent[]>(content) ?? Array.Empty<SecurityEvent>();
-            Console.WriteLine("Processed " + events.Length + " events");
 
-            for (int i = 0; i < events.Length; i++)
+            if (events.Length == 0)
             {
-                //Event itterative loop for logic
+                Console.WriteLine("Events array contained no usable events");
+                return;
+            }
+
+            Console.WriteLine("\nLog event summary \n");
+            Console.WriteLine("------------------ \n");
+            Console.WriteLine("Processed " + events.Length + " events\n");
+            Console.WriteLine("Events by ID\n");
+            Console.WriteLine("------------------\n");
+
+            var eventGroups = events.GroupBy(e => e.EventId).OrderByDescending(e => e.Key);
+
+            foreach (var secEvent in eventGroups)
+            {
+                Console.WriteLine($"{secEvent.Key} : {secEvent.Count()}");
             }
             
             
