@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Tracing;
 using System.IO;
 using System.Text.Json;
 
@@ -7,7 +6,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Provide user with help if no comand line argument is passed to the program
+        // Provide user with help if no command line argument is passed to the program
         if (args.Length == 0)
         {
             Console.WriteLine("Error: No command argument specified.");
@@ -17,23 +16,47 @@ class Program
         }
             string inputFile = args[0];
 
-            if (System.IO.File.Exists(inputFile))
-            {
-                string content = System.IO.File.ReadAllText(inputFile);
-                Console.WriteLine("File provided");
-                Events[] events = JsonSerializer.Deserialize<Events[]>(content);
-                Console.WriteLine("Processed " + events.Length + " events");
-            }
+        if (!File.Exists(inputFile))
+        {
+            Console.WriteLine($"Error: Specified log file '{inputFile}' does not exist.");
+            return;
         }
+
+        try
+        {
+            string content = File.ReadAllText(inputFile);
+            Console.WriteLine("File provided");
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                Console.WriteLine("Error: Log file returned null or empty. Check log file.");
+                return;
+            }
+            
+            SecurityEvent[] events = JsonSerializer.Deserialize<SecurityEvent[]>(content) ?? Array.Empty<SecurityEvent>();
+            Console.WriteLine("Processed " + events.Length + " events");
+
+            for (int i = 0; i < events.Length; i++)
+            {
+                //Event itterative loop for logic
+            }
+            
+            
+        }
+
+        catch (Exception ex) 
+        {
+            Console.WriteLine($"Input file error: {ex.Message}");
+        }
+    }
 }
 
-public class Events
+public class SecurityEvent
 {
-    public DateTime timestamp { get; set; }
-    public string EventID { get; set; }
+    public DateTime Timestamp { get; set; }
+    public int EventId { get; set; }
     public string Computer { get; set; }
     public string Username { get; set; }
-    public string SourceIP { get; set; }
+    public string SourceIp { get; set; }
     public string EventType { get; set; }
     public string Level { get; set; }
     public string Message { get; set; }
