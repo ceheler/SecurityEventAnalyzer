@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 
 class Program
@@ -42,34 +43,47 @@ class Program
             Console.WriteLine("\nLog event summary \n");
             Console.WriteLine("------------------ \n");
             Console.WriteLine("Processed " + events.Length + " events\n");
-            Console.WriteLine("Events by ID\n");
-            Console.WriteLine("------------------\n");
 
-            var eventGroups = events.GroupBy(e => e.EventId).OrderByDescending(e => e.Key);
             var failedLogins = events.Where(e => e.EventId == 4625);
-
-            foreach (var secEvent in eventGroups)
+            var suspLogins = failedLogins.GroupBy(e => new
             {
-                Console.WriteLine($"{secEvent.Key} : {secEvent.Count()}");
-            }
+                e.Username,
+                e.SourceIp
+            }).ToArray();
 
-            Console.WriteLine("\nFailed logins by User");
-            Console.WriteLine("------------------\n");
-
-            foreach (var secEvent in failedLogins.GroupBy(e => e.Username)) 
+            foreach (var logins in suspLogins) 
             {
-                Console.WriteLine($"{secEvent.Key} : {secEvent.Count()}");
+                var orderedLogins = logins.OrderBy(e => e.Timestamp).ToArray();
+                int eventGroupCount = orderedLogins.Count();
+                if (eventGroupCount >= 5)
+                {
+                    for (int i = 0; i < eventGroupCount; i++)
+                    {
+                        DateTime start = orderedLogins[i].Timestamp;
+                        DateTime end = start.AddMinutes(5);
+                        int eventsInWindow = 0;
+                        for (int j = i; j < eventGroupCount; j++)
+                        {
+                            if (orderedLogins[j].Timestamp <= end)
+                            {
+                                eventsInWindow++;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        if (eventsInWindow >= 5)
+                        {
+                            Console.WriteLine("Brute Force Warning");
+                            Console.WriteLine("===================");
+                            Console.WriteLine($"User : {orderedLogins[i].Username}\nSource Ip : {orderedLogins[i].SourceIp}\nAttempts: {eventsInWindow}");
+                            Console.WriteLine("===================");
+                            break;
+                        }
+                    }
+                }
             }
-
-            Console.WriteLine("\nFailed logins by Source Ip");
-            Console.WriteLine("------------------\n");
-
-            foreach (var secEvent in failedLogins.GroupBy(e => e.SourceIp))
-            {
-                Console.WriteLine($"{secEvent.Key} : {secEvent.Count()}");
-            }
-
-
         }
 
         catch (Exception ex) 
