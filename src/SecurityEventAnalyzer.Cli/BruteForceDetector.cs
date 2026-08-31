@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SecurityEventAnalyzer.Cli
 {
     public class BruteForceDetector
     {
-        public static List<SecurityFinding> DetectionEngine(List<SecurityEvent> importedEvents)
+        public static List<SecurityFinding> Detect(List<SecurityEvent> importedEvents)
         {
+            if (importedEvents.Count == 0)
+            {
+                return [];
+            }
+            var detections = new List<SecurityFinding>();
             var failedLogins = importedEvents.Where(e => e.EventId == 4625);
             var suspLogins = failedLogins.GroupBy(e => new
             {
@@ -17,7 +21,7 @@ namespace SecurityEventAnalyzer.Cli
             foreach (var logins in suspLogins)
             {
                 var orderedLogins = logins.OrderBy(e => e.Timestamp).ToArray();
-                int eventGroupCount = orderedLogins.Count();
+                int eventGroupCount = orderedLogins.Length;
                 if (eventGroupCount >= 5)
                 {
                     for (int i = 0; i < eventGroupCount; i++)
@@ -38,13 +42,22 @@ namespace SecurityEventAnalyzer.Cli
                         }
                         if (eventsInWindow >= 5)
                         {
-                            
+                            detections.Add(new SecurityFinding 
+                            {
+                                RuleName = "Brute Force Login Detection",
+                                Timestamp = start,
+                                Description = $"{eventsInWindow} failed logins detected within 5 min window.",
+                                Username = logins.Key.Username,
+                                SourceIp = logins.Key.SourceIp,
+                                Count = eventsInWindow,
+                                Severity = Severity.High
+                            });
                             break;
                         }
                     }
                 }
             }
-            return null;
+            return detections;
         }
     }
 }
