@@ -937,9 +937,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyxer.Tests\\SecurityEventAnalyxer.Tests.csproj",
-      "projectName": "SecurityEventAnalyxer.Tests",
-      "projectPath": "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyxer.Tests\\SecurityEventAnalyxer.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyxer.Tests\\SecurityEventAnalyzer.Tests.csproj",
+      "projectName": "SecurityEventAnalyzer.Tests",
+      "projectPath": "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyxer.Tests\\SecurityEventAnalyzer.Tests.csproj",
       "packagesPath": "C:\\Users\\cehel\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyxer.Tests\\obj\\",
       "projectStyle": "PackageReference",

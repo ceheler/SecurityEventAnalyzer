@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bEWqQh8/wKw=",
+  "dgSpecHash": "sm5TA92uljw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyxer.Tests\\SecurityEventAnalyxer.Tests.csproj",
+  "projectFilePath": "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyxer.Tests\\SecurityEventAnalyzer.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cehel\\.nuget\\packages\\coverlet.collector\\6.0.4\\coverlet.collector.6.0.4.nupkg.sha512",
     "C:\\Users\\cehel\\.nuget\\packages\\microsoft.codecoverage\\17.14.1\\microsoft.codecoverage.17.14.1.nupkg.sha512",
