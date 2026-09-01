@@ -26,6 +26,7 @@ class Program
         try
         {
             string content = File.ReadAllText(inputFile);
+            var bruteForceDetector = new BruteForceDetector();
             Console.WriteLine("\nAnalyzing " + args[0]);
             if (string.IsNullOrWhiteSpace(content))
             {
@@ -45,7 +46,7 @@ class Program
             Console.WriteLine("------------------ \n");
             Console.WriteLine("Processed " + events.Length + " events\n");
             
-            var findings = BruteForceDetector.Detect(events.ToList());
+            var findings = bruteForceDetector.Detect(events.ToList());
 
             foreach (var finding in findings)
             {

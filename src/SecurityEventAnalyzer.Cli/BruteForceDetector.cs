@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace SecurityEventAnalyzer.Cli
 {
-    public class BruteForceDetector
+    public class BruteForceDetector : IDetectionRule
     {
-        public static List<SecurityFinding> Detect(List<SecurityEvent> importedEvents)
+        public List<SecurityFinding> Detect(List<SecurityEvent> importedEvents)
         {
             if (importedEvents.Count == 0)
             {

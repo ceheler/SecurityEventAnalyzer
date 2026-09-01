@@ -12,5 +12,6 @@ namespace SecurityEventAnalyzer.Cli
         public string EventType { get; set; }
         public string Level { get; set; }
         public string Message { get; set; }
+        public string? TargetUser { get; set; }
     }
 }

@@ -14,7 +14,8 @@ public class BruteForceDetectorTests
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 45), },
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 03, 0), }
             ];
-        var findings = BruteForceDetector.Detect(testList);
+        var detector = new BruteForceDetector();
+        var findings = detector.Detect(testList);
         var finding = Assert.Single(findings);
 
         Assert.Equal("Admin", finding.Username);
@@ -33,7 +34,8 @@ public class BruteForceDetectorTests
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 30), },
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 45), }
             ];
-        var findings = BruteForceDetector.Detect(testList);
+        var detector = new BruteForceDetector();
+        var findings = detector.Detect(testList);
         Assert.Empty(findings);
     }
 
@@ -47,7 +49,8 @@ public class BruteForceDetectorTests
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 03, 0), },
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 06, 0), }
             ];
-        var findings = BruteForceDetector.Detect(testList);
+        var detector = new BruteForceDetector();
+        var findings = detector.Detect(testList);
         Assert.Empty(findings);
     }
 
@@ -61,7 +64,8 @@ public class BruteForceDetectorTests
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 03, 0), },
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 05, 0), }
             ];
-        var findings = BruteForceDetector.Detect(testList);
+        var detector = new BruteForceDetector();
+        var findings = detector.Detect(testList);
         var finding = Assert.Single(findings);
 
         Assert.Equal("Admin", finding.Username);
@@ -81,7 +85,8 @@ public class BruteForceDetectorTests
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.10" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 03, 0), },
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 04, 0), }
             ];
-        var findings = BruteForceDetector.Detect(testList);
+        var detector = new BruteForceDetector();
+        var findings = detector.Detect(testList);
         Assert.Empty(findings);
     }
 
@@ -95,7 +100,8 @@ public class BruteForceDetectorTests
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Joe", Timestamp = new DateTime(2026, 8, 31, 05, 03, 0), },
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 04, 0), }
             ];
-        var findings = BruteForceDetector.Detect(testList);
+        var detector = new BruteForceDetector();
+        var findings = detector.Detect(testList);
         Assert.Empty(findings);
     }
 
@@ -103,7 +109,8 @@ public class BruteForceDetectorTests
     public void Detect_ReturnsNoFinding_WhenInputIsEmpty()
     {
         List<SecurityEvent> testList = new List<SecurityEvent>();
-        var findings = BruteForceDetector.Detect(testList);
+        var detector = new BruteForceDetector();
+        var findings = detector.Detect(testList);
         Assert.Empty(findings);
     }
 
@@ -122,8 +129,8 @@ public class BruteForceDetectorTests
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Adam", Timestamp = new DateTime(2026, 8, 31, 05, 11, 45), },
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Adam", Timestamp = new DateTime(2026, 8, 31, 05, 13, 0), }
             ];
-
-        var findings = BruteForceDetector.Detect(testList);
+        var detector = new BruteForceDetector();
+        var findings = detector.Detect(testList);
         Assert.Equal(2, findings.Count);
     }
 }
