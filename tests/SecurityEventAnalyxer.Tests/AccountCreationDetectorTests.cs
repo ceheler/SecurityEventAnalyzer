@@ -1,4 +1,6 @@
-﻿using SecurityEventAnalyzer.Cli;
+﻿using SecurityEventAnalyzer.Cli.Enums;
+using SecurityEventAnalyzer.Cli.Models;
+using SecurityEventAnalyzer.Cli.Detection;
 
 namespace SecurityEventAnalyzer.Tests;
 
@@ -8,13 +10,13 @@ public class AccountCreationDetectorTests
     public void Detect_ReturnsFinding_NewAccountCreated()
     {
         List<SecurityEvent> testList = [
-            new SecurityEvent { EventId = 4720, SourceIp = "10.10.10.1" , TargetUser = "John", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), Computer = "Computer1" }
+            new SecurityEvent { EventId = 4720, SourceIp = "10.10.10.1" , TargetUser = "John", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), Computer = "Computer1", Username ="joe" }
             ];
         var detector = new AccountCreationDetector();
         var findings = detector.Detect(testList);
         var finding = Assert.Single(findings);
 
-        Assert.Equal("John", finding.Username);
+        Assert.Equal("John", finding.TargetUser);
         Assert.Equal("10.10.10.1", finding.SourceIp);
         Assert.Equal(Severity.Informational, finding.Severity);
         Assert.Equal("Account Creation Detected", finding.RuleName);
@@ -26,8 +28,8 @@ public class AccountCreationDetectorTests
     public void Detect_ReturnsFinding_MultipleAccountCreated()
     {
         List<SecurityEvent> testList = [
-            new SecurityEvent { EventId = 4720, SourceIp = "10.10.10.1" , Username = "John", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), Computer = "Computer1" },
-            new SecurityEvent { EventId = 4720, SourceIp = "10.10.10.1" , Username = "Tony", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), Computer = "Computer2" }
+            new SecurityEvent { EventId = 4720, SourceIp = "10.10.10.1" , TargetUser = "John", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), Computer = "Computer1" },
+            new SecurityEvent { EventId = 4720, SourceIp = "10.10.10.1" , TargetUser = "Tony", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), Computer = "Computer2" }
             ];
         var detector = new AccountCreationDetector();
         var findings = detector.Detect(testList);

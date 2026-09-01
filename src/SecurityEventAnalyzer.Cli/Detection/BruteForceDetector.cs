@@ -1,7 +1,9 @@
-﻿using System;
+﻿using SecurityEventAnalyzer.Cli.Enums;
+using SecurityEventAnalyzer.Cli.Models;
+using System;
 using System.Collections.Generic;
 
-namespace SecurityEventAnalyzer.Cli
+namespace SecurityEventAnalyzer.Cli.Detection
 {
     public class BruteForceDetector : IDetectionRule
     {
@@ -12,7 +14,7 @@ namespace SecurityEventAnalyzer.Cli
                 return [];
             }
             var detections = new List<SecurityFinding>();
-            var failedLogins = importedEvents.Where(e => e.EventId == 4625);
+            var failedLogins = importedEvents.Where(e => e.EventId == 4625 && e.SourceIp is not null && e.Username is not null);
             var suspLogins = failedLogins.GroupBy(e => new
             {
                 e.Username,

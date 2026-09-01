@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SecurityEventAnalyzer.Cli.Models;
 
 
-namespace SecurityEventAnalyzer.Cli
+namespace SecurityEventAnalyzer.Cli.Detection
 {
     public interface IDetectionRule
     {

@@ -1,9 +1,8 @@
-﻿using System;
-
-namespace SecurityEventAnalyzer.Cli
+﻿namespace SecurityEventAnalyzer.Cli.Enums
 {
     public enum Severity
     {
+            Unknown = 0,
             Critical,
             High,
             Medium,

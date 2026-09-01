@@ -1,14 +1,11 @@
-﻿using SecurityEventAnalyzer.Cli;
-using System;
-using System.IO;
-using System.Linq;
+﻿using SecurityEventAnalyzer.Cli.Detection;
+using SecurityEventAnalyzer.Cli.Models;
 using System.Text.Json;
 
 class Program
 {
     static void Main(string[] args)
     {
-        // Display usage instructions if proper command line arguments are not passed.
         if (args.Length == 0)
         {
             Console.WriteLine("Error: No command argument specified.");
@@ -26,7 +23,12 @@ class Program
         try
         {
             string content = File.ReadAllText(inputFile);
-            var bruteForceDetector = new BruteForceDetector();
+            List<IDetectionRule> rules =
+                [ new BruteForceDetector(),
+                  new AccountCreationDetector(),
+                  new PrivilegedGroupMembershipDetector()
+                ];
+            var detector = new DetectionEngine(rules);
             Console.WriteLine("\nAnalyzing " + args[0]);
             if (string.IsNullOrWhiteSpace(content))
             {
@@ -43,24 +45,33 @@ class Program
             }
 
             Console.WriteLine("\nLog event summary \n");
-            Console.WriteLine("------------------ \n");
+            Console.WriteLine("=================== \n");
             Console.WriteLine("Processed " + events.Length + " events\n");
-            
-            var findings = bruteForceDetector.Detect(events.ToList());
-
-            foreach (var finding in findings)
+            var findings = detector.Detect(events.ToList());
+            if (findings.Count is 0)
             {
-                Console.WriteLine(finding.RuleName);
-                Console.WriteLine(finding.Description);
-                Console.WriteLine("===================");
-                Console.WriteLine($"Severity: {finding.Severity}");
-                Console.WriteLine($"User: {finding.Username} \nSource Ip: {finding.SourceIp} \nCount: {finding.Count} \nTimestamp: {finding.Timestamp}\n\n");
+                Console.WriteLine("\n No Security findings Detected \n");
+            }
+            else 
+            {
+                foreach (var finding in findings)
+                {
+                    Console.WriteLine($"\n{finding.RuleName}");
+                    Console.WriteLine(finding.Description);
+                    Console.WriteLine("===================");
+                    Console.WriteLine($"Severity: {finding.Severity}");
+                    Console.WriteLine($"Timestamp: {finding.Timestamp}");
+
+                    foreach (var detail in finding.GetFindingDetails())
+                    {
+                        Console.WriteLine(detail);
+                    }
+                }
             }
         }
-
         catch (Exception ex) 
         {
-            Console.WriteLine($"Input file error: {ex.Message}");
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
 }

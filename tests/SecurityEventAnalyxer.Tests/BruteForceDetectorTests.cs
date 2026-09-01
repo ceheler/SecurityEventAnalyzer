@@ -1,4 +1,6 @@
-﻿using SecurityEventAnalyzer.Cli;
+﻿using SecurityEventAnalyzer.Cli.Enums;
+using SecurityEventAnalyzer.Cli.Models;
+using SecurityEventAnalyzer.Cli.Detection;
 
 namespace SecurityEventAnalyzer.Tests;
 
@@ -29,10 +31,11 @@ public class BruteForceDetectorTests
     public void Detect_ReturnsNoFinding_WhenOnlyFourFailedLoginsOccur()
     {
         List<SecurityEvent> testList = [
-            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), },
-            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 0), },
-            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 30), },
-            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 45), }
+            new SecurityEvent { EventId = 4625, SourceIp = null , Username = null, Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), },
+            new SecurityEvent { EventId = 4625, SourceIp = null , Username = null, Timestamp = new DateTime(2026, 8, 31, 05, 01, 0), },
+            new SecurityEvent { EventId = 4625, SourceIp = null , Username = null, Timestamp = new DateTime(2026, 8, 31, 05, 01, 30), },
+            new SecurityEvent { EventId = 4625, SourceIp = null , Username = null, Timestamp = new DateTime(2026, 8, 31, 05, 01, 45), },
+            new SecurityEvent { EventId = 4625, SourceIp = null , Username = null, Timestamp = new DateTime(2026, 8, 31, 05, 02, 45), }
             ];
         var detector = new BruteForceDetector();
         var findings = detector.Detect(testList);
@@ -41,6 +44,21 @@ public class BruteForceDetectorTests
 
     [Fact]
     public void Detect_ReturnsNoFinding_WhenOnlyFiveFailedLoginsOccurOutsideFiveMinutes()
+    {
+        List<SecurityEvent> testList = [
+            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), },
+            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 0), },
+            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 02, 0), },
+            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 03, 0), },
+            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 06, 0), }
+            ];
+        var detector = new BruteForceDetector();
+        var findings = detector.Detect(testList);
+        Assert.Empty(findings);
+    }
+
+    [Fact]
+    public void Detect_ReturnsNoFinding_WhenFiveFailedLoginsOccurInsideFiveMinutesNullUserAndSourceIp()
     {
         List<SecurityEvent> testList = [
             new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), },

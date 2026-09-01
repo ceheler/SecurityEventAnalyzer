@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SecurityEventAnalyzer.Cli.Enums;
+using SecurityEventAnalyzer.Cli.Models;
 
-namespace SecurityEventAnalyzer.Cli
+namespace SecurityEventAnalyzer.Cli.Detection
 {
     public class AccountCreationDetector : IDetectionRule
     {
@@ -18,7 +18,8 @@ namespace SecurityEventAnalyzer.Cli
                 detections.Add(new SecurityFinding
                 {
                     RuleName = "Account Creation Detected",
-                    Username = accounts.TargetUser,
+                    Username = accounts.Username,
+                    TargetUser = accounts.TargetUser,
                     Computer = accounts.Computer,
                     SourceIp = accounts.SourceIp,
                     Description = $"Account username: {accounts.TargetUser} created on computer {accounts.Computer}",
