@@ -54,7 +54,7 @@ Severity is assigned based on a hierarchy
 - Future expandability due to the OOP design of the project
 
 ### DetectionEngine
-- Receives a collection of ```IDetectionRule``` detectors through constructor injection
+- Receives a collection of `IDetectionRule` detectors through constructor injection
 - Executes each registered rule against the imported events
 
 ### Program.cs
@@ -111,13 +111,13 @@ Source IP: 10.10.10.50
 3. Navigate to path of .exe 
 4. Call the .exe and specify the JSON as the first command line argument
 
-PS Example: `.\SecurityEventAnalyzer.Cli.exe C:\Logs\test_windows_security_events.json`
+PS Example:`.\SecurityEventAnalyzer.Cli.exe C:\Logs\test_windows_security_events.json`
 
-SDK-Style Example: `dotnet run --project .\src\SecurityEventAnalyzer.Cli -- C:\Logs\test_windows_security_events.json`
+SDK-Style Example:`dotnet run --project .\src\SecurityEventAnalyzer.Cli -- C:\Logs\test_windows_security_events.json`
 
 ## Running Tests
 1. Run tests inside Visual Studio by right-clicking the test project and selecting "Run tests"
-2. Using a terminal, navigate to the solution or test project directory and run `text dotnet test`
+2. Using a terminal, navigate to the solution or test project directory and run `dotnet test`
 
 ## Project Structure
 
