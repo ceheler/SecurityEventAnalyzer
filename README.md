@@ -112,6 +112,7 @@ Source IP: 10.10.10.50
 4. Call the .exe and specify the JSON as the first command line argument
 
 PS Example: `.\SecurityEventAnalyzer.Cli.exe C:\Logs\test_windows_security_events.json`
+
 SDK-Style Example: `dotnet run --project .\src\SecurityEventAnalyzer.Cli -- C:\Logs\test_windows_security_events.json`
 
 ## Running Tests

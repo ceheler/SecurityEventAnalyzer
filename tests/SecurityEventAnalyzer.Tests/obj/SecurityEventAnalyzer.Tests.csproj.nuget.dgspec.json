@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyxer.Tests\\SecurityEventAnalyzer.Tests.csproj": {}
+    "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyzer.Tests\\SecurityEventAnalyzer.Tests.csproj": {}
   },
   "projects": {
     "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\src\\SecurityEventAnalyzer.Cli\\SecurityEventAnalyzer.Cli.csproj": {
@@ -346,14 +346,14 @@
         }
       }
     },
-    "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyxer.Tests\\SecurityEventAnalyzer.Tests.csproj": {
+    "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyzer.Tests\\SecurityEventAnalyzer.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyxer.Tests\\SecurityEventAnalyzer.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyzer.Tests\\SecurityEventAnalyzer.Tests.csproj",
         "projectName": "SecurityEventAnalyzer.Tests",
-        "projectPath": "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyxer.Tests\\SecurityEventAnalyzer.Tests.csproj",
+        "projectPath": "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyzer.Tests\\SecurityEventAnalyzer.Tests.csproj",
         "packagesPath": "C:\\Users\\cehel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyxer.Tests\\obj\\",
+        "outputPath": "C:\\Users\\cehel\\source\\repos\\SecurityEventAnalyzer\\tests\\SecurityEventAnalyzer.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

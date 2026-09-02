@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="../tests/SecurityEventAnalyxer.Tests/SecurityEventAnalyzer.Tests.csproj" Id="dfd7ffb0-a858-4299-845f-1a99ac0dd4fb" />
+  <Project Path="../tests/SecurityEventAnalyzer.Tests/SecurityEventAnalyzer.Tests.csproj" />
   <Project Path="SecurityEventAnalyzer.Cli/SecurityEventAnalyzer.Cli.csproj" Id="684169c1-896e-4030-82aa-6346ef15db0f" />
 </Solution>
