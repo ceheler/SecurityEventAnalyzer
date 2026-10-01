@@ -12,5 +12,9 @@
         public string? Message { get; set; }
         public string? TargetUser { get; set; }
         public string? TargetGroup { get; set; }
+        public string? TargetDomainName { get; set; }
+        public string? MemberSid { get; set; }
+        public string? TargetSid { get; set; }
+        public string? LogonId { get; set; }
     }
 }
