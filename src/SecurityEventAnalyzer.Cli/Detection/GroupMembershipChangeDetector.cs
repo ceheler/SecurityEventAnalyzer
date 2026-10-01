@@ -3,7 +3,7 @@ using SecurityEventAnalyzer.Cli.Models;
 
 namespace SecurityEventAnalyzer.Cli.Detection
 {
-    public class PrivilegedGroupMembershipDetector : IDetectionRule
+    public class GroupMembershipChangeDetector : IDetectionRule
     {
         public List<SecurityFinding> Detect(List<SecurityEvent> importedEvents) 
         {
@@ -12,9 +12,14 @@ namespace SecurityEventAnalyzer.Cli.Detection
                 return [];
             }
             var detections = new List<SecurityFinding>();
-            var privilegedGroupMembershipEvents = importedEvents.Where(e => e.EventId == 4728);
-            foreach (var securityEvent in privilegedGroupMembershipEvents)
+            var groupMembershipChangedEvents = importedEvents.Where(e => e.EventId == 4728 || e.EventId == 4732);
+            foreach (var securityEvent in groupMembershipChangedEvents)
             {
+                string scope = "Local";
+                if (securityEvent.EventId == 4728)
+                {
+                    scope = "Global";
+                }
                 Severity severity;
                 StringComparison comp = StringComparison.OrdinalIgnoreCase;
                 var targetGroup = securityEvent.TargetGroup;
@@ -33,20 +38,36 @@ namespace SecurityEventAnalyzer.Cli.Detection
                         severity = Severity.Low;
                     }
                 }
-                else 
+                else
                 {
                     severity = Severity.Low;
                 }
+                if (!string.IsNullOrWhiteSpace(securityEvent.TargetSid))
+                {
+                    if (string.Equals(securityEvent.TargetSid, "S-1-5-32-544", StringComparison.OrdinalIgnoreCase))
+                    {
+                        severity = Severity.High;
+                    }
+                }
+                
+
+                var memberIdentity =
+                        !string.IsNullOrWhiteSpace(securityEvent.TargetUser)
+                        ? securityEvent.TargetUser
+                        : !string.IsNullOrWhiteSpace(securityEvent.MemberSid)
+                            ? securityEvent.MemberSid
+                            : "Unknown";
+
                 detections.Add(new SecurityFinding
                 {
-                    RuleName = "Privileged Group Membership Change Detected",
+                    RuleName = $"{scope} Group Membership Change Detected",
                     Username = securityEvent.Username,
                     TargetUser = securityEvent.TargetUser,
                     TargetGroup = securityEvent.TargetGroup,
                     SourceIp = securityEvent.SourceIp,
-                    Description = $"Account username: {securityEvent.TargetUser} was added to {securityEvent.TargetGroup}",
                     Timestamp = securityEvent.Timestamp,
-                    Severity = severity
+                    Severity = severity,
+                    Description = $"Member: {memberIdentity} was added to {securityEvent.TargetGroup}"
                 });
                 
             }

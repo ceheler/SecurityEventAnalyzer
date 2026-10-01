@@ -9,7 +9,7 @@ public class DetectionEngineTests
     List<IDetectionRule> rules =
                 [ new BruteForceDetector(),
                   new AccountCreationDetector(),
-                  new PrivilegedGroupMembershipDetector()
+                  new GroupMembershipChangeDetector()
                 ];
     [Fact]
     public void Detect_ReturnsFinding_NewAccountCreated()

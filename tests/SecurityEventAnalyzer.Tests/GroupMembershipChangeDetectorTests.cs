@@ -4,7 +4,7 @@ using SecurityEventAnalyzer.Cli.Detection;
 
 namespace SecurityEventAnalyzer.Tests
 {
-    public class PrivilegedGroupMembershipDetectorTests
+    public class GroupMembershipChangeDetectorTests
     {
         [Fact]
         public void Detect_ReturnsHighFinding_WhenUserAddedToDomainAdmins()
@@ -12,7 +12,7 @@ namespace SecurityEventAnalyzer.Tests
             List<SecurityEvent> testList = [
                 new SecurityEvent { EventId = 4728, SourceIp = "10.10.10.1" , TargetUser = "hax0r", TargetGroup = "Domain Admins", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0) }
                 ];
-            var detector = new PrivilegedGroupMembershipDetector();
+            var detector = new GroupMembershipChangeDetector();
             var findings = detector.Detect(testList);
             var finding = Assert.Single(findings);
 
@@ -29,7 +29,7 @@ namespace SecurityEventAnalyzer.Tests
             List<SecurityEvent> testList = [
                 new SecurityEvent { EventId = 4728, SourceIp = "10.10.10.1", TargetUser = "hax0r", TargetGroup = "Enterprise Admins", Timestamp = new DateTime(2026, 9, 1, 6, 0 ,0) }
                 ];
-            var detector = new PrivilegedGroupMembershipDetector();
+            var detector = new GroupMembershipChangeDetector();
             var findings = detector.Detect(testList);
             var finding = Assert.Single(findings);
 
@@ -46,7 +46,7 @@ namespace SecurityEventAnalyzer.Tests
             List<SecurityEvent> testList = [
                 new SecurityEvent { EventId = 4728, SourceIp = "10.10.10.1", TargetUser = "hax0r", TargetGroup = "IT Admins", Timestamp = new DateTime(2026, 9, 1, 6, 0 ,0) }
                 ];
-            var detector = new PrivilegedGroupMembershipDetector();
+            var detector = new GroupMembershipChangeDetector();
             var findings = detector.Detect(testList);
             var finding = Assert.Single(findings);
 
@@ -63,7 +63,7 @@ namespace SecurityEventAnalyzer.Tests
             List<SecurityEvent> testList = [
                 new SecurityEvent { EventId = 4728, SourceIp = "10.10.10.1", TargetUser = "hax0r", TargetGroup = "Sales Users", Timestamp = new DateTime(2026, 9, 1, 6, 0 ,0) }
                 ];
-            var detector = new PrivilegedGroupMembershipDetector();
+            var detector = new GroupMembershipChangeDetector();
             var findings = detector.Detect(testList);
             var finding = Assert.Single(findings);
 
@@ -80,7 +80,7 @@ namespace SecurityEventAnalyzer.Tests
             List<SecurityEvent> testList = [
                 new SecurityEvent { EventId = 4728, SourceIp = "10.10.10.1", TargetUser = "hax0r", TargetGroup = null, Timestamp = new DateTime(2026, 9, 1, 6, 0 ,0) }
                 ];
-            var detector = new PrivilegedGroupMembershipDetector();
+            var detector = new GroupMembershipChangeDetector();
             var findings = detector.Detect(testList);
             var finding = Assert.Single(findings);
 
@@ -98,7 +98,7 @@ namespace SecurityEventAnalyzer.Tests
                 new SecurityEvent { EventId = 4728, SourceIp = "10.10.10.1", TargetUser = "hax0r", TargetGroup = "Domain Admins", Timestamp = new DateTime(2026, 9, 1, 6, 0 ,0) },
                 new SecurityEvent { EventId = 4728, SourceIp = "10.10.10.1", TargetUser = "hax0r", TargetGroup = "Enterprise Admins", Timestamp = new DateTime(2026, 9, 1, 6, 0 ,0) }
                 ];
-            var detector = new PrivilegedGroupMembershipDetector();
+            var detector = new GroupMembershipChangeDetector();
             var findings = detector.Detect(testList);
             Assert.Equal(2, findings.Count);
         }
@@ -109,7 +109,7 @@ namespace SecurityEventAnalyzer.Tests
             List<SecurityEvent> testList = [
                 new SecurityEvent { EventId = 4724, SourceIp = "10.10.10.1", TargetUser = "hax0r", TargetGroup = "Sales Users", Timestamp = new DateTime(2026, 9, 1, 6, 0 ,0) }
                 ];
-            var detector = new PrivilegedGroupMembershipDetector();
+            var detector = new GroupMembershipChangeDetector();
             var findings = detector.Detect(testList);
             Assert.Empty(findings);
         }
@@ -118,7 +118,7 @@ namespace SecurityEventAnalyzer.Tests
         public void Detect_ReturnsNoFinding_PrivilegeEmptyInput()
         {
             List<SecurityEvent> testList = [];
-            var detector = new PrivilegedGroupMembershipDetector();
+            var detector = new GroupMembershipChangeDetector();
             var findings = detector.Detect(testList);
             Assert.Empty(findings);
         }

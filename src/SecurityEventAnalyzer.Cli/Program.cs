@@ -26,7 +26,8 @@ class Program
             List<IDetectionRule> rules =
                 [ new BruteForceDetector(),
                   new AccountCreationDetector(),
-                  new PrivilegedGroupMembershipDetector()
+                  new GroupMembershipChangeDetector(),
+                  new AccountPrivilegeCorrelationDetector()
                 ];
             var detector = new DetectionEngine(rules);
             Console.WriteLine("\nAnalyzing " + args[0]);
@@ -35,7 +36,25 @@ class Program
                 Console.WriteLine("Error: Log file returned null or empty. Check log file.");
                 return;
             }
-            
+
+
+            using JsonDocument doc = JsonDocument.Parse(content);
+
+            var fifthEvent = doc.RootElement[4];
+            var eventId = fifthEvent.GetProperty("EventId");
+
+            Console.WriteLine("\n--- DEBUG ---");
+            Console.WriteLine(fifthEvent.GetRawText());
+            Console.WriteLine($"ValueKind: {eventId.ValueKind}");
+            Console.WriteLine($"Raw EventId: {eventId.GetRawText()}");
+            Console.WriteLine($"TryGetInt32: {eventId.TryGetInt32(out int parsedId)}");
+            Console.WriteLine($"Parsed ID: {parsedId}");
+            Console.WriteLine($"SecurityEvent.EventId runtime type: " +
+                $"{typeof(SecurityEvent).GetProperty(nameof(SecurityEvent.EventId))?.PropertyType}");
+            Console.WriteLine($"Loaded model assembly: {typeof(SecurityEvent).Assembly.Location}");
+            Console.WriteLine("-------------\n");
+
+
             SecurityEvent[] events = JsonSerializer.Deserialize<SecurityEvent[]>(content) ?? Array.Empty<SecurityEvent>();
 
             if (events.Length == 0)
