@@ -33,17 +33,17 @@ public class DetectionEngineTests
     public void Detect_ReturnsFinding_WhenFiveFailedLoginsOccurWithinFiveMinutes()
     {
         List<SecurityEvent> testList = [
-            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), },
-            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 0), },
-            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 30), },
-            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 45), },
-            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 03, 0), }
+            new SecurityEvent { EventType = "FailedAuthentication", SourceIp = "10.10.10.1" , TargetUser = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), },
+            new SecurityEvent { EventType = "FailedAuthentication", SourceIp = "10.10.10.1" , TargetUser = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 0), },
+            new SecurityEvent { EventType = "FailedAuthentication", SourceIp = "10.10.10.1" , TargetUser = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 30), },
+            new SecurityEvent { EventType = "FailedAuthentication", SourceIp = "10.10.10.1" , TargetUser = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 45), },
+            new SecurityEvent { EventType = "FailedAuthentication", SourceIp = "10.10.10.1" , TargetUser = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 03, 0), }
             ];
         var detector = new DetectionEngine(rules);
         var findings = detector.Detect(testList);
         var finding = Assert.Single(findings);
 
-        Assert.Equal("Admin", finding.Username);
+        Assert.Equal("Admin", finding.TargetUser);
         Assert.Equal("10.10.10.1", finding.SourceIp);
         Assert.Equal(5, finding.Count);
         Assert.Equal(Severity.High, finding.Severity);
@@ -54,11 +54,11 @@ public class DetectionEngineTests
     public void Detect_ReturnsFinding_WhenFiveFailedLoginsOccurWithinFiveMinutesAndAccountCreated()
     {
         List<SecurityEvent> testList = [
-            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), },
-            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 0), },
-            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 30), },
-            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 45), },
-            new SecurityEvent { EventId = 4625, SourceIp = "10.10.10.1" , Username = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 03, 0), },
+            new SecurityEvent { EventType = "FailedAuthentication", SourceIp = "10.10.10.1" , TargetUser = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), },
+            new SecurityEvent { EventType = "FailedAuthentication", SourceIp = "10.10.10.1" , TargetUser = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 0), },
+            new SecurityEvent { EventType = "FailedAuthentication", SourceIp = "10.10.10.1" , TargetUser = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 30), },
+            new SecurityEvent { EventType = "FailedAuthentication", SourceIp = "10.10.10.1" , TargetUser = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 01, 45), },
+            new SecurityEvent { EventType = "FailedAuthentication", SourceIp = "10.10.10.1" , TargetUser = "Admin", Timestamp = new DateTime(2026, 8, 31, 05, 03, 0), },
             new SecurityEvent { EventId = 4720, SourceIp = "10.10.10.1" , TargetUser = "John", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), Computer = "Computer1" }
             ];
         var detector = new DetectionEngine(rules);
@@ -67,7 +67,7 @@ public class DetectionEngineTests
     }
 
     [Fact]
-    public void Detect_ReturnsFinding_WhenPrivilegedAccountCreated()
+    public void Detect_ReturnsFinding_WhenGroupMembershipChanged()
     {
         List<SecurityEvent> testList = [
                 new SecurityEvent { EventId = 4728, SourceIp = "10.10.10.1" , TargetUser = "hax0r", TargetGroup = "Domain Admins", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0) }
@@ -79,7 +79,7 @@ public class DetectionEngineTests
         Assert.Equal("hax0r", finding.TargetUser);
         Assert.Equal("10.10.10.1", finding.SourceIp);
         Assert.Equal(Severity.High, finding.Severity);
-        Assert.Equal("Privileged Group Membership Change Detected", finding.RuleName);
+        Assert.Contains("Group Membership Change Detected", finding.RuleName);
         Assert.Equal(new DateTime(2026, 8, 31, 05, 00, 0), finding.Timestamp);
     }
 

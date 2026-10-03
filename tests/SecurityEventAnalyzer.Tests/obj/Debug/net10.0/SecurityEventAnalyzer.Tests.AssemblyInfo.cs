@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SecurityEventAnalyzer.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0cfeadffd8335561cfb89b03b23ba8377047673")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8899578ee9da1d17a8e5cb780570ffbc07741f73")]
 [assembly: System.Reflection.AssemblyProductAttribute("SecurityEventAnalyzer.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SecurityEventAnalyzer.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

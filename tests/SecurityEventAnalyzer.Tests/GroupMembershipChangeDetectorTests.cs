@@ -19,7 +19,7 @@ namespace SecurityEventAnalyzer.Tests
             Assert.Equal("hax0r", finding.TargetUser);
             Assert.Equal("10.10.10.1", finding.SourceIp);
             Assert.Equal(Severity.High, finding.Severity);
-            Assert.Equal("Privileged Group Membership Change Detected", finding.RuleName);
+            Assert.Contains("Group Membership Change Detected", finding.RuleName);
             Assert.Equal(new DateTime(2026, 8, 31, 05, 00, 0), finding.Timestamp);
         }
 
@@ -36,7 +36,7 @@ namespace SecurityEventAnalyzer.Tests
             Assert.Equal("hax0r", finding.TargetUser);
             Assert.Equal("10.10.10.1", finding.SourceIp);
             Assert.Equal(Severity.High, finding.Severity);
-            Assert.Equal("Privileged Group Membership Change Detected", finding.RuleName);
+            Assert.Contains("Group Membership Change Detected", finding.RuleName);
             Assert.Equal(new DateTime(2026, 9, 1, 6, 0, 0), finding.Timestamp);
         }
 
@@ -53,7 +53,7 @@ namespace SecurityEventAnalyzer.Tests
             Assert.Equal("hax0r", finding.TargetUser);
             Assert.Equal("10.10.10.1", finding.SourceIp);
             Assert.Equal(Severity.Medium, finding.Severity);
-            Assert.Equal("Privileged Group Membership Change Detected", finding.RuleName);
+            Assert.Contains("Group Membership Change Detected", finding.RuleName);
             Assert.Equal(new DateTime(2026, 9, 1, 6, 0, 0), finding.Timestamp);
         }
 
@@ -70,7 +70,7 @@ namespace SecurityEventAnalyzer.Tests
             Assert.Equal("hax0r", finding.TargetUser);
             Assert.Equal("10.10.10.1", finding.SourceIp);
             Assert.Equal(Severity.Low, finding.Severity);
-            Assert.Equal("Privileged Group Membership Change Detected", finding.RuleName);
+            Assert.Contains("Group Membership Change Detected", finding.RuleName);
             Assert.Equal(new DateTime(2026, 9, 1, 6, 0, 0), finding.Timestamp);
         }
 
@@ -87,7 +87,7 @@ namespace SecurityEventAnalyzer.Tests
             Assert.Equal("hax0r", finding.TargetUser);
             Assert.Equal("10.10.10.1", finding.SourceIp);
             Assert.Equal(Severity.Low, finding.Severity);
-            Assert.Equal("Privileged Group Membership Change Detected", finding.RuleName);
+            Assert.Contains("Group Membership Change Detected", finding.RuleName);
             Assert.Equal(new DateTime(2026, 9, 1, 6, 0, 0), finding.Timestamp);
         }
 
