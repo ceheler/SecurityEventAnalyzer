@@ -14,11 +14,16 @@ namespace SecurityEventAnalyzer.Cli.Detection
                 return [];
             }
             var detections = new List<SecurityFinding>();
-            var failedLogins = importedEvents.Where(e => e.EventId == 4625 && e.SourceIp is not null && e.Username is not null);
+            var failedLogins = importedEvents.Where(e => string.Equals(e.EventType, "FailedAuthentication", 
+                StringComparison.OrdinalIgnoreCase) 
+                && e.SourceIp is not null 
+                && e.TargetUser is not null
+                );
             var suspLogins = failedLogins.GroupBy(e => new
             {
-                e.Username,
-                e.SourceIp
+                e.TargetUser,
+                e.SourceIp,
+                e.Computer
             }).ToArray();
             foreach (var logins in suspLogins)
             {
@@ -49,7 +54,7 @@ namespace SecurityEventAnalyzer.Cli.Detection
                                 RuleName = "Brute Force Login Detection",
                                 Timestamp = start,
                                 Description = $"{eventsInWindow} failed logins detected within 5 min window.",
-                                Username = logins.Key.Username,
+                                TargetUser = logins.Key.TargetUser,
                                 SourceIp = logins.Key.SourceIp,
                                 Count = eventsInWindow,
                                 Severity = Severity.High
