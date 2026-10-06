@@ -27,7 +27,8 @@ class Program
                 [ new BruteForceDetector(),
                   new AccountCreationDetector(),
                   new GroupMembershipChangeDetector(),
-                  new AccountPrivilegeCorrelationDetector()
+                  new AccountPrivilegeCorrelationDetector(),
+                  new PortScanDetector()
                 ];
             var detector = new DetectionEngine(rules);
             Console.WriteLine("\nAnalyzing " + args[0]);

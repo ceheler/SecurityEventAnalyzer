@@ -9,6 +9,7 @@ namespace SecurityEventAnalyzer.Cli.Models
         public string Description { get; set; } = string.Empty;
         public string? Username { get; set; }
         public string? SourceIp { get; set; }
+        public string? DestinationIp { get; set; }
         public int? Count { get; set; }
         public string? Computer { get; set; }
         public string? TargetUser { get; set; }
@@ -31,6 +32,9 @@ namespace SecurityEventAnalyzer.Cli.Models
 
             if (!string.IsNullOrWhiteSpace(Computer))
                 yield return $"Computer: {Computer}";
+
+            if (!string.IsNullOrWhiteSpace(DestinationIp))
+                yield return $"Destination IP: {DestinationIp}";
 
             if (Count.HasValue)
                 yield return $"Count: {Count}";

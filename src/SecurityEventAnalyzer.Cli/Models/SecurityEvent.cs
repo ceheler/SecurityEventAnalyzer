@@ -20,5 +20,7 @@
         public string? Service { get; set; }
         public string? AccountValidity { get; set; }
         public string? Protocol { get; set; }
+        public string? DestinationIp { get; set; }
+        public int? DestinationPort { get; set; }
     }
 }
