@@ -22,6 +22,8 @@ jobs:
           dotnet-version: '10.0.x'
       - name: Restore dependencies
         run: dotnet restore
+      - name: Audit dependencies for vulnerabilities
+        run: dotnet list package --vulnerable --include-transitive
       - name: Build solution
         run: dotnet build --no-restore
       - name: Run tests
