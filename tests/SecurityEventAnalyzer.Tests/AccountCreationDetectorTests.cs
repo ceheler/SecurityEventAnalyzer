@@ -10,7 +10,7 @@ public class AccountCreationDetectorTests
     public void Detect_ReturnsFinding_NewAccountCreated()
     {
         List<SecurityEvent> testList = [
-            new SecurityEvent { EventId = 4720, SourceIp = "10.10.10.1" , TargetUser = "John", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), Computer = "Computer1", Username ="joe" }
+            new SecurityEvent { EventId = 4728, SourceIp = "10.10.10.1" , TargetUser = "John", Timestamp = new DateTime(2026, 8, 31, 05, 00, 0), Computer = "Computer1", Username ="joe" }
             ];
         var detector = new AccountCreationDetector();
         var findings = detector.Detect(testList);
