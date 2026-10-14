@@ -22,5 +22,8 @@
         public string? Protocol { get; set; }
         public string? DestinationIp { get; set; }
         public int? DestinationPort { get; set; }
+        public string? Action { get; set; }
+        public string? ResourceType { get; set; }
+        public string? ResourceId { get; set; }
     }
 }
