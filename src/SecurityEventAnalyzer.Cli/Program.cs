@@ -28,7 +28,8 @@ class Program
                   new AccountCreationDetector(),
                   new GroupMembershipChangeDetector(),
                   new AccountPrivilegeCorrelationDetector(),
-                  new PortScanDetector()
+                  new PortScanDetector(),
+                  new CloudDestructiveActionDetector()
                 ];
             var detector = new DetectionEngine(rules);
             Console.WriteLine("\nAnalyzing " + args[0]);

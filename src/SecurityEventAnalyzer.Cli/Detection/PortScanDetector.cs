@@ -43,7 +43,7 @@ namespace SecurityEventAnalyzer.Cli.Detection
                         {
                             if (orderedEvents[j].Timestamp <= end)
                             {
-                                distinctPortList.Add(orderedEvents[j].DestinationPort.Value);
+                                distinctPortList.Add(orderedEvents[j].DestinationPort.GetValueOrDefault());
                             }
                             else
                             {
