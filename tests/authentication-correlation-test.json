@@ -1,0 +1,19 @@
+[
+    {
+        "Timestamp": "2026-10-20T09:21:10Z",
+        "EventId": 4769,
+        "StatusCode": "0x0",
+        "Computer": "DC01",
+        "Username": "svc_healthmon",
+        "SourceIp": "10.20.14.37",
+        "ServicePrincipalName": "cifs/APP02"
+    },
+    {
+        "Timestamp": "2026-10-20T09:21:15Z",
+        "EventId": 4624,
+        "Computer": "APP02",
+        "Username": "svc_healthmon",
+        "SourceIp": "10.20.14.37",
+        "LogonType": 3
+    }
+]

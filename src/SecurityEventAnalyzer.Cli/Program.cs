@@ -1,5 +1,6 @@
 ﻿using SecurityEventAnalyzer.Cli.Detection;
 using SecurityEventAnalyzer.Cli.Models;
+using SecurityEventAnalyzer.Cli.Correlation;
 using System.Text.Json;
 
 class Program
@@ -23,6 +24,7 @@ class Program
         try
         {
             string content = File.ReadAllText(inputFile);
+
             List<IDetectionRule> rules =
                 [ new BruteForceDetector(),
                   new AccountCreationDetector(),
@@ -31,7 +33,12 @@ class Program
                   new PortScanDetector(),
                   new CloudDestructiveActionDetector()
                 ];
-            var detector = new DetectionEngine(rules);
+
+            List<IAuthenticationDetectionRule> authenticationRules =
+                [ new SuccessfulAuthenticationAfterFailuresDetector()
+                ];
+            
+            var detector = new DetectionEngine(rules, authenticationRules);
             Console.WriteLine("\nAnalyzing " + args[0]);
             if (string.IsNullOrWhiteSpace(content))
             {
@@ -47,10 +54,15 @@ class Program
                 return;
             }
 
+            // Correlate authentication events
+            var correlator = new AuthenticationCorrelator();
+            var correlations = correlator.Correlate(events.ToList());
+            Console.WriteLine($"\nGenerated {correlations.Count} authentication correlations");
+
             Console.WriteLine("\nLog event summary \n");
             Console.WriteLine("=================== \n");
             Console.WriteLine("Processed " + events.Length + " events\n");
-            var findings = detector.Detect(events.ToList());
+            var findings = detector.Detect(events.ToList(), correlations);
             if (findings.Count is 0)
             {
                 Console.WriteLine("\n No Security findings Detected \n");
