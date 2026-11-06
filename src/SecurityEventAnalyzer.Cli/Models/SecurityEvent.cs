@@ -25,5 +25,8 @@
         public string? Action { get; set; }
         public string? ResourceType { get; set; }
         public string? ResourceId { get; set; }
+        public int? LogonType { get; set; }
+        public string? StatusCode { get; set; }
+        public string? ServicePrincipalName { get; set; }
     }
 }

@@ -1,0 +1,70 @@
+[
+    {
+        "Timestamp": "2026-10-20T09:18:00Z",
+        "EventId": 4769,
+        "StatusCode": "0x0",
+        "Computer": "DC01",
+        "Username": "Administrator",
+        "SourceIp": "10.20.14.37",
+        "ServicePrincipalName": "cifs/APP02"
+    },
+    {
+        "Timestamp": "2026-10-20T09:18:05Z",
+        "EventId": 4625,
+        "Computer": "APP02",
+        "Username": "Administrator",
+        "SourceIp": "10.20.14.37",
+        "LogonType": 3
+    },
+    {
+        "Timestamp": "2026-10-20T09:19:00Z",
+        "EventId": 4769,
+        "StatusCode": "0x0",
+        "Computer": "DC01",
+        "Username": "Administrator",
+        "SourceIp": "10.20.14.37",
+        "ServicePrincipalName": "cifs/APP02"
+    },
+    {
+        "Timestamp": "2026-10-20T09:19:05Z",
+        "EventId": 4625,
+        "Computer": "APP02",
+        "Username": "Administrator",
+        "SourceIp": "10.20.14.37",
+        "LogonType": 3
+    },
+    {
+        "Timestamp": "2026-10-20T09:20:00Z",
+        "EventId": 4769,
+        "StatusCode": "0x0",
+        "Computer": "DC01",
+        "Username": "Administrator",
+        "SourceIp": "10.20.14.37",
+        "ServicePrincipalName": "cifs/APP02"
+    },
+    {
+        "Timestamp": "2026-10-20T09:20:05Z",
+        "EventId": 4625,
+        "Computer": "APP02",
+        "Username": "Administrator",
+        "SourceIp": "10.20.14.37",
+        "LogonType": 3
+    },
+    {
+        "Timestamp": "2026-10-20T09:21:00Z",
+        "EventId": 4769,
+        "StatusCode": "0x0",
+        "Computer": "DC01",
+        "Username": "Administrator",
+        "SourceIp": "10.20.14.37",
+        "ServicePrincipalName": "cifs/APP02"
+    },
+    {
+        "Timestamp": "2026-10-20T09:21:05Z",
+        "EventId": 4624,
+        "Computer": "APP02",
+        "Username": "Administrator",
+        "SourceIp": "10.20.14.37",
+        "LogonType": 3
+    }
+]
